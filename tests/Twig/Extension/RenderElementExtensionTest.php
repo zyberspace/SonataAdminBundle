@@ -22,6 +22,7 @@ use Sonata\AdminBundle\Templating\MutableTemplateRegistryInterface;
 use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
 use Sonata\AdminBundle\Tests\Fixtures\Entity\FooToString;
 use Sonata\AdminBundle\Tests\Fixtures\Enum\Suit;
+use Sonata\AdminBundle\Tests\Fixtures\Enum\TranslatableSuit;
 use Sonata\AdminBundle\Tests\Fixtures\StubFilesystemLoader;
 use Sonata\AdminBundle\Twig\Extension\RenderElementExtension;
 use Sonata\AdminBundle\Twig\Extension\XEditableExtension;
@@ -1576,6 +1577,24 @@ final class RenderElementExtensionTest extends TestCase
             [
                 'use_value' => true,
                 'enum_translation_domain' => 'render-element-extension-test',
+            ],
+        ];
+
+        $elements[] = [
+            '<td class="sonata-ba-list-field sonata-ba-list-field-enum" objectId="12345"> [trans]enum.suit.hearts[/trans] </td>',
+            FieldDescriptionInterface::TYPE_ENUM,
+            TranslatableSuit::Hearts,
+            [],
+        ];
+
+        $elements[] = [
+            '<td class="sonata-ba-list-field sonata-ba-list-field-enum" objectId="12345"> [trans]enum.suit.spades[/trans] </td>',
+            FieldDescriptionInterface::TYPE_ENUM,
+            TranslatableSuit::Spades,
+            [
+                // These values are ignored if the enum implements the TranslatableInterface
+                'use_value' => false,
+                'enum_translation_domain' => 'doesnt-exist',
             ],
         ];
 
