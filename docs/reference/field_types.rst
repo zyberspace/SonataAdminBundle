@@ -221,7 +221,7 @@ Option                                  Description
     This provides full compatibility with symfony's
     `EnumType <https://symfony.com/doc/current/reference/forms/types/enum.html>`_ form type:
 
-    .. code-block:: php
+    ::
 
         protected function configureListFields(ListMapper $list): void
         {
